@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Better rails debugger</title>
+  <%= stylesheet_link_tag "better_rails_debugger/application", media: "all" %>
+  <%= javascript_include_tag "better_rails_debugger/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="app header-fixed sidebar-fixed">
+
+  <%= render partial: 'better_rails_debugger/shared/header' %>
+
+  <div class="app-body">
+
+    <%= render partial: 'better_rails_debugger/shared/sidebar' %>
+
+    <main class="main">
+      <%=
+        # https://coreui.io/docs/components/bootstrap-breadcrumb/
+        content_for :breadcrum %>
+      <div class="container-fluid">
+        <% if flash[:notice] %>
+            <div class="alert alert-primary" role="alert">
+              <%= flash[:notice] %>
+            </div>
+        <% end %>
+
+        <% if flash[:error] %>
+            <div class="alert alert-danger" role="alert">
+              <%= flash[:error] %>
+            </div>
+        <% end %>
+
+
+        <%= yield %>
+      </div>
+    </main>
+  </div>
+
+  <footer class="app-footer d-flex">
+    <span class="text-left">
+      Thanks to <a href="https://www.coreui.io/" target="_blank">CoreUI</a> team for this amazing template.
+    </span>
+  </footer>
+
+</body>
+</html>

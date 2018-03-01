@@ -1,0 +1,36 @@
+.card
+  .card-header
+    Analysis Groups
+  .card-body
+
+    - content_for :header_nav do
+      %ul.nav.navbar-nav.d-md-down-none
+        %li.nav-item
+          %a.nav-link.navbar-toggler.sidebar-toggler{:href => "#"} ☰
+        %li.nav-item.px-3
+          %a.nav-link{:href => new_analysis_group_path} New
+
+      %ul.navbar-nav.ml-md-auto
+
+
+    - content_for :breadcrum do
+      %ol.breadcrumb
+        %li.breadcrumb-item.active
+          %a{:href => "#"} Analysis Groups
+
+    %table.table.border.border-secondary.border-top-0
+      %thead.bg-secondary.text-white
+        %tr.d-flex
+          %th.col-8 Name
+          %th.col-2 ID
+          %th.col-2 Actions
+      %tbody
+        - @groups.each do |group|
+          %tr.d-flex
+            %td.col-8= link_to group.name, analysis_group_path(group.id)
+            %td.col-2= group.id
+            %td.col-2
+              = link_to "Inspect", analysis_group_path(group.id), class: 'btn btn-sm btn-secondary'
+              = link_to "Edit", edit_analysis_group_path(group.id), class: 'btn btn-sm btn-info'
+              = link_to "Delete", analysis_group_path(group.id), data: {  confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-sm btn-danger'
+    = will_paginate @groups, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

@@ -1,0 +1,62 @@
+.card
+  .card-header
+    = @instance.identifier
+    = "-"
+    = @instance.created_at.strftime("%c")
+  .card-body
+
+    - content_for :header_nav do
+      %ul.nav.navbar-nav.d-md-down-none
+        %li.nav-item
+          %a.nav-link.navbar-toggler.sidebar-toggler{:href => "#"} ☰
+        %li.nav-item.px-3
+          %a.nav-link{:href => group_instance_path(@instance)} List
+
+      %ul.navbar-nav.ml-md-auto
+
+
+    - content_for :breadcrum do
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{:href => analysis_groups_path} Analysis Groups
+        %li.breadcrumb-item
+          %a{:href => analysis_group_path(@instance.analysis_group.id)}= @instance.analysis_group.name
+        %li.breadcrumb-item
+          %a{:href => "#"}= @instance.identifier
+
+    .alert.alert-warning{:role => "alert"}
+      %h4.alert-heading
+        DISCLAIMER
+      %p
+        Remember that Memsize is a
+        %a.alert-link{:href => "http://ruby-doc.org/stdlib-2.5.0/libdoc/objspace/rdoc/ObjectSpace.html#method-c-memsize_of"} HINT.
+        The used memory is not the sum of every object listed here because different reasons.
+      %p
+        Better Rails Debugger only track the creation of Ruby objects, not the creation of C-Ruby objects, and oly
+        those objects that are created from the moment that a request arrive to a controller. Everythinng else, like
+        objects created by Middlewares, are not been tracked because performance.
+
+    %table.table.border.border-secondary.border-top-0
+      %thead.bg-secondary.text-white
+        %tr.d-flex
+          %th.col-8 Location
+          %th.col-2 Memsize
+          %th.col-2 Class
+
+      %tbody
+        - @objects.each do |object|
+          %tr.d-flex
+            %td.col-8
+              %i.fa.fa-eye.fa-2x.text-secondary{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{object.id}"}
+              %span.text-primary
+                =object.source_file
+              %span= ":"
+              %span.text-success=object.source_line
+            %td.col-2= number_to_human_size object.memsize
+            %td.col-2.text-danger= object.class_name
+          %tr.collapse.out{id: object.id}
+            %td{:colspan => 3}
+              %pre.line-numbers{:"data-start" => object.source_line - 6, :"data-line" => object.source_line}
+                %code.language-ruby= object.source_code
+
+    = will_paginate @objects, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

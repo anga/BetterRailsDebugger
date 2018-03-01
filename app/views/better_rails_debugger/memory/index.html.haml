@@ -1,0 +1,20 @@
+.card
+  .card-header
+    Memory per request
+  .card-body
+
+    %table.table.border.border-secondary.border-top-0
+      %thead.bg-secondary.text-white
+        %th Request URL
+        %th Request IP
+        %th Total Objects
+        %th Actions
+
+      %tbody
+        - @requests.each do |request|
+          %tr
+            %td= request.url
+            %td= request.ip
+            %td= request.objects.count
+            %td= link_to "Inspect", memory_path(request.id)
+    = will_paginate @requests, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

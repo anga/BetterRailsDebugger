@@ -1,0 +1,19 @@
+source 'https://rubygems.org'
+
+# Declare your gem's dependencies in better_rails_debugger.gemspec.
+# Bundler will treat runtime dependencies like base dependencies, and
+# development dependencies will be added by default to the :development group.
+gemspec
+
+# Declare any dependencies that are still in development here instead of in
+# your gemspec. These might include edge Rails or gems from your path or
+# Git. Remember to move these dependencies to your gemspec before releasing
+# your gem to rubygems.org.
+
+# To use a debugger
+# gem 'byebug', group: [:development, :test]
+gem 'kaminari'
+gem "will_paginate_mongoid"
+gem "will_paginate-bootstrap4"
+gem 'rouge', '~> 3.1'
+gem "font-awesome-rails"

@@ -1,0 +1,41 @@
+= form_for @group do |f|
+  .form-group.d-flex
+    = f.label :name, class: 'sr-only', class: 'col-2'
+    = f.text_field :name, min: 3, class: 'form-control form-control-lg col-10'
+
+  %fielset.form-group
+    %legend Settings
+    .form-group.d-flex.justify-content-start
+      = f.label :times_to_run, class: 'col-2'
+      .col-10
+        = f.number_field :times_to_run
+        .text-secondary.d-inline Set 0 or any negative value to be infinite
+    .form-group.d-flex.justify-content-start
+      = f.label :analyze_repeated_instances, class: 'col-2'
+      .col-10
+        = f.check_box :analyze_repeated_instances
+        .text-secondary.d-inline if false, check the identifier and do not run the analyzer if already exist one
+    .form-group.d-flex.justify-content-start
+      = f.label :collect_memory_information, class: 'col-2'
+      .col-10
+        = f.check_box :collect_memory_information
+        .text-secondary.d-inline Disabling this option, is going to disable all memory options
+
+    .form-group.d-flex.justify-content-start
+      = f.label :record_objects_in, class: 'col-2'
+      .col-10
+        = f.text_area :record_objects_in, rows: 3, class: 'form-control col-4'
+        .text-secondary Every line must be a file or a directory, everything else is going to be omitted.
+
+    .form-group.d-flex.justify-content-start
+      = f.label :analise_memory_in_code, class: 'col-2'
+      .col-10
+        = f.check_box :analise_memory_in_code
+        .text-secondary.d-inline Enable this is you want to debug a memory bloat
+    .form-group.d-flex.justify-content-start
+      = f.label :analise_memory_in_gems, class: 'col-2'
+      .col-10
+        = f.check_box :analise_memory_in_gems
+        .text-danger.d-inline Analise memory of all gems in the block it's really slow
+
+  %button.btn.btn-primary{:type => "submit"} Confirm

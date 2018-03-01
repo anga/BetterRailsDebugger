@@ -1,0 +1,35 @@
+.card
+  .card-header
+    = @group.name
+  .card-body
+
+    - content_for :header_nav do
+      %ul.nav.navbar-nav.d-md-down-none
+        %li.nav-item
+          %a.nav-link.navbar-toggler.sidebar-toggler{:href => "#"} ☰
+        %li.nav-item.px-3
+          %a.nav-link{:href => analysis_groups_path} List
+
+      %ul.navbar-nav.ml-md-auto
+
+
+    - content_for :breadcrum do
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{:href => analysis_groups_path} Analysis Groups
+        %li.breadcrumb-item
+          %a{:href => "#"}= @group.name
+
+    %table.table.border.border-secondary.border-top-0
+      %thead.bg-secondary.text-white
+        %tr.d-flex
+          %th.col-8 Identifier
+          %th.col-2 Date
+          %th.col-2 Actions
+      %tbody
+        - @instances.each do |instance|
+          %tr.d-flex
+            %td.col-8= link_to instance.identifier, objects_group_instance_path(instance.id)
+            %th.col-2= instance.created_at.strftime("%c")
+            %td.col-2= link_to "Objects", objects_group_instance_path(instance.id), class: 'btn btn-sm btn-information'
+    = will_paginate @instances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

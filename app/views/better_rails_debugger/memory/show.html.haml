@@ -1,0 +1,26 @@
+.card
+  .card-header
+    Request
+    = @request.url
+    = " - "
+    = @request.ip
+    at
+    = @request.created_at
+  .card-body
+
+
+    %table.table.border.border-secondary.border-top-0
+      %thead.bg-secondary.text-white
+        %th Object class
+        %th Location
+        %th Memsize
+        %th Actions
+
+      %tbody
+        - @request.objects.each do |object|
+          %tr
+            %td= object.class_name
+            %td= "#{object.source_file}:#{object.source_line}"
+            %td= object.memsize
+            %td
+    =# will_paginate @requests, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
