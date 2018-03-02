@@ -43,6 +43,13 @@ bundle exec sidekiq
 
 3) Set MongoID database.yml file:
 
+In rails 5 run:
+```ruby
+rails g mongoid:config
+```
+
+change the file configuration and/or rename it.
+
 Create an initializer to configure like `config/initializers/better_ruby_debugger.rb`
 
 ```ruby
