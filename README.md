@@ -56,15 +56,15 @@ end
 Once everything installed and configured, you can go to [http://localhost:3000/debug](http://localhost:3000/debug)
 
 <p align="center">
-  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png">
+  <img src="https://raw.githubusercontent.com/anga/BetterRailsDebugger/master/doc/images/analysis_group.png">
 </p>
 
 <p align="center">
-  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/new_analysis_group.png">
+  <img src="https://raw.githubusercontent.com/anga/BetterRailsDebugger/master/doc/images/new_analysis_group.png">
 </p>
 
 <p align="center">
-  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group_2.png">
+  <img src="https://raw.githubusercontent.com/anga/BetterRailsDebugger/master/doc/images/analysis_group_2.png">
 </p>
 
 Once you have the id of the group, you can start analysing code, for example, we are going to analyze all our rails 
@@ -87,11 +87,11 @@ end
 With this, we can just go to our app, run the code and start to see some results:
 
 <p align="center">
-  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/group_instance.png">
+  <img src="https://raw.githubusercontent.com/anga/BetterRailsDebugger/master/doc/images/group_instance.png">
 </p>
 
 <p align="center">
-  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png">
+  <img src="https://raw.githubusercontent.com/anga/BetterRailsDebugger/master/doc/images/show_group_instance.png">
 </p>
 
 ## License
