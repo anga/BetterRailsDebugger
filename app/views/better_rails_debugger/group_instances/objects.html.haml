@@ -36,12 +36,20 @@
         those objects that are created from the moment that a request arrive to a controller. Everythinng else, like
         objects created by Middlewares, are not been tracked because performance.
 
+    %h3 Filter
+    %form{url: objects_group_instance_path(@instance, column: params[:column], order: params[:order]), method: "get"}
+      .form-group.d-flex
+        .col-4
+          %input.form-control{name: 'filter', placeholder: 'Filename Memsize or Class', value: params[:filter]}
+        .col-6
+          %button.btn.btn-primary{type: 'submit'} Filter
+
     %table.table.border.border-secondary.border-top-0
       %thead.bg-secondary.text-white
         %tr.d-flex
-          %th.col-8 Location
-          %th.col-2 Memsize
-          %th.col-2 Class
+          %th.col-8= order_link "Location", 'location', @instance
+          %th.col-2= order_link "Memsize", 'memsize', @instance
+          %th.col-2= order_link "Class", 'class', @instance
 
       %tbody
         - @objects.each do |object|

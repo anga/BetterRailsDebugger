@@ -9,7 +9,24 @@ module BetterRailsDebugger
         redirect_to analysis_groups_path, flash: {error: 'Instance not found'}
         return
       end
-      @objects = @instance.objects.order(created_at: 'desc').limit(20).paginate(page: (params[:page] || 1), per_page: 20)
+      @objects = @instance.objects.order(created_at: 'desc').limit(20)
+      if ['asc', 'desc'].include? params[:order] and ['location', 'memsize', 'class'].include? params[:column]
+        if params[:column] == 'location'
+          @objects = @objects.order({source_file: params[:order], source_line: params[:order]})
+        elsif params[:column] == 'memsize'
+          @objects = @objects.order({memsize: params[:order]})
+        elsif params[:column] == 'class'
+          @objects = @objects.order({class_name: params[:order]})
+        end
+      end
+      if params[:filter].present?
+        @objects = @objects.or({source_file: /.*#{params[:filter]}.*/i},
+                               {source_line: /.*#{params[:filter]}.*/i},
+                               {memsize:     /.*#{params[:filter]}.*/i},
+                               {class_name:  /.*#{params[:filter]}.*/i})
+        pp @objects
+      end
+      @objects = @objects.paginate(page: (params[:page] || 1), per_page: 20)
     end
 
     def code
