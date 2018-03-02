@@ -55,11 +55,17 @@ end
 
 Once everything installed and configured, you can go to [http://localhost:3000/debug](http://localhost:3000/debug)
 
-![alt confiuration screen](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png)
+<p align="center">
+  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png">
+</p>
 
-![alt new analysis group](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/new_analysis_group.png)
+<p align="center">
+  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/new_analysis_group.png">
+</p>
 
-![alt get the id of analysis group](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group_2.png)
+<p align="center">
+  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group_2.png">
+</p>
 
 Once you have the id of the group, you can start analysing code, for example, we are going to analyze all our rails 
 controller actions:
@@ -80,10 +86,13 @@ end
 
 With this, we can just go to our app, run the code and start to see some results:
 
-![alt confiuration screen](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/group_instance.png)
+<p align="center">
+  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/group_instance.png">
+</p>
 
-![alt confiuration screen](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png)
-
+<p align="center">
+  <img src="https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png">
+</p>
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
