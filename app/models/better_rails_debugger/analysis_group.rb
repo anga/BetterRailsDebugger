@@ -9,7 +9,7 @@ module BetterRailsDebugger
 
     field :name, type: String
 
-    has_many :group_instances, class_name: "::BetterRailsDebugger::GroupInstance", inverse_of: :analysis_group, dependent: :destroy
+    has_many :group_instances, class_name: "::BetterRailsDebugger::GroupInstance", inverse_of: :analysis_group, dependent: :delete_all
 
     # Settings
 

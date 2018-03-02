@@ -1,4 +1,7 @@
 # BetterRailsDebugger
+> DISCLAIMER: This gem is in a really early development stage, you can start to use it, but
+> do not expect a lot of features. Right now, the only supported feature it's track Ruby objects creations. 
+
 Add a a couple of code analyzers that helps you to find where you are loosing performance or memory.
 
 Remember that tack memory allocation and free it's really expensive and is going to affect the performance
@@ -27,7 +30,7 @@ $ bundle
 mount BetterRailsDebugger::Engine => "/debug"
 ```
 
-2) Enable Sidkiq (or any other activejob backend) in `config/application.rb`:
+2) Enable Sidkiq (or any other activejob backend) in `config/application.rb` (remember you need to install `sidekiq` first):
 
 ```ruby
 config.active_job.queue_adapter = :sidekiq
@@ -52,8 +55,35 @@ end
 
 Once everything installed and configured, you can go to [http://localhost:3000/debug](http://localhost:3000/debug)
 
-![alt confiuration screen]()
+![alt confiuration screen](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png)
 
-The first step is create an analyse group
+![alt new analysis group](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/new_analysis_group.png)
+
+![alt get the id of analysis group](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group_2.png)
+
+Once you have the id of the group, you can start analysing code, for example, we are going to analyze all our rails 
+controller actions:
+
+```ruby
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+
+  around_action :do_analysis
+
+  def do_analysis
+    BetterRailsDebugger::MemoryAnalyzer.instance.analyze "#{request.url}", "5a98a93f50f04b079458fd57" do
+      yield
+    end
+  end
+end
+```
+
+With this, we can just go to our app, run the code and start to see some results:
+
+![alt confiuration screen](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/group_instance.png)
+
+![alt confiuration screen](https://github.com/anga/BetterRailsDebugger/tree/master/doc/images/analysis_group.png)
+
+
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

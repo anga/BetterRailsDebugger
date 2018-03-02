@@ -4,7 +4,7 @@ module BetterRailsDebugger
     include Mongoid::Timestamps
 
     belongs_to :analysis_group, class_name: "::BetterRailsDebugger::AnalysisGroup"
-    has_many :objects, class_name: "::BetterRailsDebugger::ObjectInformation", inverse_of: :group_instance, dependent: :destroy
+    has_many :objects, class_name: "::BetterRailsDebugger::ObjectInformation", inverse_of: :group_instance, dependent: :delete_all
 
     # Basic information
     field :identifier, type: String
