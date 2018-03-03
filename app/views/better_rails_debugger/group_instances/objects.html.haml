@@ -36,6 +36,8 @@
         those objects that are created from the moment that a request arrive to a controller. Everythinng else, like
         objects created by Middlewares, are not been tracked because performance.
 
+    = render partial: 'better_rails_debugger/group_instances/stats_summary'
+
     %h3 Filter
     %form{url: objects_group_instance_path(@instance, column: params[:column], order: params[:order]), method: "get"}
       .form-group.d-flex

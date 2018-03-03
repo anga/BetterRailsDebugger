@@ -19,8 +19,8 @@ module BetterRailsDebugger
       else
         ::ObjectSpace.trace_object_allocations do
           yield
-          collect_information(identifier, group_id)
         end
+        collect_information(identifier, group_id)
       end
     end
 

@@ -1,0 +1,28 @@
+.stats.d-flex
+  .card.col-6
+    .card-body
+      %h4.card-title Files with more allocations
+      %table.table
+        %thead.bg-secondary.text-white
+          %tr.d-flex
+            %th.col-10 File
+            %th.col-2 Allocations
+        %tbody
+          - @instance.files_with_more_allocations(4).each do |file|
+            %tr.d-flex
+              %td.col-10.text-primary= file[0]
+              %td.col-2= file[1]
+
+  .card.col-6
+    .card-body
+      %h4.card-title Files that consume more memory
+      %table.table
+        %thead.bg-secondary.text-white
+          %tr.d-flex
+            %th.col-10 File
+            %th.col-2 Allocations
+        %tbody
+          - @instance.files_that_use_more_memory(4).each do |file|
+            %tr.d-flex
+              %td.col-10.text-primary= file[0]
+              %td.col-2= "~ #{number_to_human_size  file[1]}"

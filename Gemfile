@@ -15,5 +15,4 @@ gemspec
 gem 'kaminari'
 gem "will_paginate_mongoid"
 gem "will_paginate-bootstrap4"
-gem 'rouge', '~> 3.1'
 gem "font-awesome-rails"

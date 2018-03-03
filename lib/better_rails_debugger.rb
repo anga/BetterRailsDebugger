@@ -3,7 +3,6 @@ require "mongoid"
 require "haml"
 require "will_paginate_mongoid"
 require "will_paginate-bootstrap4"
-require "rouge"
 require "font-awesome-rails"
 
 require "better_rails_debugger/config"

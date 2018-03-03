@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency "mongoid", [">= 7.0.0.beta", "< 8.0"]
   s.add_dependency "will_paginate_mongoid"
   s.add_dependency "will_paginate-bootstrap4"
-  s.add_dependency "rouge", "~> 3.1"
   s.add_dependency "font-awesome-rails"
 
   s.add_development_dependency "sqlite3"
