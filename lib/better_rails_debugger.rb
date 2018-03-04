@@ -6,7 +6,7 @@ require "will_paginate-bootstrap4"
 require "font-awesome-rails"
 
 require "better_rails_debugger/config"
-require "better_rails_debugger/memory_analyzer"
+require "better_rails_debugger/analyzer"
 
 Haml.init_rails(binding)
 

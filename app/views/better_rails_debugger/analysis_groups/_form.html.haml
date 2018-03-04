@@ -37,18 +37,22 @@
       .col-10
         = f.check_box :analise_memory_in_gems
         .text-danger.d-inline Analise memory of all gems in the block it's really slow
-  %fielset.form-group
-    %legend Code execution
-    .form-group.d-flex.justify-content-start
-      = f.label :generate_method_execution_history, class: 'col-2'
-      .col-10
-        = f.check_box :generate_method_execution_history
-        .text-secondary.d-inline Generate and store the whole backtrace of method executed.
+  / Disabled by the moment
+    %fielset.form-group
+      %legend.d-inline
+        Code execution
+      %i.small.d-inline.text-danger
+        (under development, do not enable it yet)
+      .form-group.d-flex.justify-content-start
+        = f.label :generate_method_execution_history, class: 'col-2'
+        .col-10
+          = f.check_box :generate_method_execution_history
+          .text-secondary.d-inline Generate and store the whole backtrace of method executed.
 
-    .form-group.d-flex.justify-content-start
-      = f.label :calculate_execution_time_of_methods, class: 'col-2'
-      .col-10
-        = f.check_box :calculate_execution_time_of_methods
-        .text-secondary.d-inline Generate and store the whole backtrace of method executed.
+      .form-group.d-flex.justify-content-start
+        = f.label :calculate_execution_time_of_methods, class: 'col-2'
+        .col-10
+          = f.check_box :calculate_execution_time_of_methods
+          .text-secondary.d-inline Generate and store the whole backtrace of method executed.
 
   %button.btn.btn-primary{:type => "submit"} Confirm

@@ -22,7 +22,9 @@
         %li.breadcrumb-item
           %a{:href => analysis_group_path(@instance.analysis_group.id)}= @instance.analysis_group.name
         %li.breadcrumb-item
-          %a{:href => "#"}= @instance.identifier
+          %a{:href => group_instance_path(@instance)}= @instance.identifier
+        %li.breadcrumb-item.active
+          %a{:href => "#"} Objects
 
     .alert.alert-warning{:role => "alert"}
       %h4.alert-heading

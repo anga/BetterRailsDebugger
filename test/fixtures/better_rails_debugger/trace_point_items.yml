@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_file: MyString
+  source_line: 1
+  method_id: MyString
+  group_instance: one
+
+two:
+  source_file: MyString
+  source_line: 1
+  method_id: MyString
+  group_instance: two

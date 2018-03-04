@@ -65,7 +65,8 @@ module BetterRailsDebugger
     def analysis_group_params
       params.require(:analysis_group).permit([:name, :collect_memory_information, :analise_memory_in_code,
                                               :analise_memory_in_gems, :record_objects_in, :times_to_run,
-                                              :analyze_repeated_instances])
+                                              :analyze_repeated_instances, :generate_method_execution_history,
+                                              :calculate_execution_time_of_methods])
     end
 
     def get_group

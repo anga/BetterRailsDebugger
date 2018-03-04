@@ -1,4 +1,5 @@
-## 0.0.4
+## 0.1.0
+* Renamed `BetterRailsDebugger::MemoryAnalyzer` to `BetterRailsDebugger::Analyzer`
 * Group Instance view now display a summary about memory
 * Notice to the user about big files
 * Notice to the user about classes that consume big amounts of memory

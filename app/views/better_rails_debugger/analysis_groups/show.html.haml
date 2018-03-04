@@ -29,7 +29,7 @@
       %tbody
         - @instances.each do |instance|
           %tr.d-flex
-            %td.col-8= link_to instance.identifier, objects_group_instance_path(instance.id)
+            %td.col-8= link_to instance.identifier, group_instance_path(instance.id)
             %th.col-2= instance.created_at.strftime("%c")
             %td.col-2= link_to "Objects", objects_group_instance_path(instance.id), class: 'btn btn-sm btn-information'
     = will_paginate @instances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

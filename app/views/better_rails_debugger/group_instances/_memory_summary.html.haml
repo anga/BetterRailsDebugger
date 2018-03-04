@@ -1,0 +1,47 @@
+%h4 Memory summary
+- if @instance.big_files.any?
+  %p
+    There are
+    %i.text-danger
+      = @instance.big_files.size
+    file that you should check.
+  %table.table.border.border-secondary.border-top-0
+    %thead.bg-secondary.text-white
+      %tr.d-flex
+        %th.col-10 File
+        %th.col-2 Memory
+
+    %tbody
+      - @instance.big_files.each do |file, size|
+        %tr.d-flex
+          %td.col-10
+            %span.text-primary
+              = file
+          %td.col-2= number_to_human_size size
+
+- else
+  %p.text-success Congratulations! all your files looks good!
+
+- if @instance.big_classes.any?
+  %p
+    There are
+    %i.text-danger
+      = @instance.big_classes.size
+    classes that you should check.
+
+  %table.table.border.border-secondary.border-top-0
+    %thead.bg-secondary.text-white
+      %tr.d-flex
+        %th.col-10 Class
+        %th.col-2 Average memory
+
+    %tbody
+      - @instance.big_classes.each_pair do |klass, hash|
+        %tr.d-flex
+          %td.col-10
+            %span.text-danger
+              = klass
+          %td.col-2= number_to_human_size hash[:average]
+- else
+  %p.text-success There is no particular class that you should care about.
+= link_to "Check all objects allocated", objects_group_instance_path(@instance)

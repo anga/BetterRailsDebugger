@@ -1,0 +1,35 @@
+.card
+  .card-header
+    = @instance.identifier
+    = "-"
+    = @instance.created_at.strftime("%c")
+  .card-body
+
+    - content_for :header_nav do
+      %ul.nav.navbar-nav.d-md-down-none
+        %li.nav-item
+          %a.nav-link.navbar-toggler.sidebar-toggler{:href => "#"} ☰
+        %li.nav-item.px-3
+          %a.nav-link{:href => group_instance_path(@instance)} List
+
+      %ul.navbar-nav.ml-md-auto
+
+
+    - content_for :breadcrum do
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{:href => analysis_groups_path} Analysis Groups
+        %li.breadcrumb-item
+          %a{:href => analysis_group_path(@instance.analysis_group.id)}= @instance.analysis_group.name
+        %li.breadcrumb-item
+          %a{:href => "#"}= @instance.identifier
+
+    %h2 Summary
+
+    - if @instance.status != 'finished'
+      .text-warning
+        The system didn't finished to collect and process all the information.
+
+    = render partial: 'better_rails_debugger/group_instances/memory_summary'
+
+    =# render partial: 'better_rails_debugger/group_instances/method_summary'

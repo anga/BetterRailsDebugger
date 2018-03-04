@@ -1,7 +1,7 @@
 require 'objspace'
 
 module BetterRailsDebugger
-  class MemoryAnalyzer
+  class Analyzer
     include Singleton
 
 
@@ -13,6 +13,7 @@ module BetterRailsDebugger
         yield
         return
       end
+      start_trace_point group
       # If we reached the max time to execute the code, just execute the code and do not collect information
       if times_to_run_exceeded?(group) or skip_instance?(group, identifier)
         yield
@@ -20,7 +21,28 @@ module BetterRailsDebugger
         ::ObjectSpace.trace_object_allocations do
           yield
         end
-        collect_information(identifier, group_id)
+      end
+      end_trace_point
+      collect_information(identifier, group_id)
+    end
+
+    def start_trace_point(group)
+      if group.generate_method_execution_history
+        @trace_point_history = []
+        tracer
+        tracer.enable
+      end
+    end
+
+    def end_trace_point
+      tracer.disable
+    end
+
+    def tracer
+      return @tracer if @tracer
+      @tracer = TracePoint.new do |tp|
+        # Record everything but us
+        @trace_point_history << {source_file: tp.path, source_line: tp.lineno, method_id: tp.method_id} if tp.path !~ /better_rails_debugger/
       end
     end
 
@@ -51,9 +73,10 @@ module BetterRailsDebugger
         Mongoid.logger.level = Logger::FATAL
       end
 
-      instance = ::BetterRailsDebugger::GroupInstance.create identifier: identifier, analysis_group_id: group_id, caller_file: caller[3][/[^:]+/]
+      instance = ::BetterRailsDebugger::GroupInstance.create identifier: identifier, analysis_group_id: group_id, caller_file: caller[3][/[^:]+/], status: 'pending'
 
       collect_memory_information(instance)
+      collect_trace_point_history(instance)
 
       # Now, it's time to analyze all collected data and generate a report
       ::BetterRailsDebugger::AnalysisRecorderJob.perform_later({ instance_id: instance.id.to_s })
@@ -90,6 +113,15 @@ module BetterRailsDebugger
       end
       ::BetterRailsDebugger::ObjectInformation.collection.insert_many(objects)
     end
+
+    def collect_trace_point_history(instance)
+      return if !@trace_point_history.kind_of? Array
+      ::BetterRailsDebugger::TracePointItem.collection.insert_many(@trace_point_history.map do |item|
+            item[:group_instance_id] = instance.id
+            item
+      end)
+    end
+
 
     def all_valid_classes
       return @all_valid_classes if @all_valid_classes

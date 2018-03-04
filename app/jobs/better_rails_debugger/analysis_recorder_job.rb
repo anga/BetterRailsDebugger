@@ -14,6 +14,8 @@ module BetterRailsDebugger
         Rails.logger.error "[BetterRailsDebugger AnalysisRecorderJob] GroupInstance '#{recorded[:instance_id]}' not found. Skiping..."
         return
       end
+      instance.status = 'processing'
+      instance.save
 
       # Now, with the group present... we can start to work on it
       # group = instance.analysis_group
@@ -30,6 +32,7 @@ module BetterRailsDebugger
       end
       instance.allocations_per_file = allocations_per_file.to_json
       instance.memsize_per_file = memsize_per_file.to_json
+      instance.status = 'finished'
       instance.save
 
     end

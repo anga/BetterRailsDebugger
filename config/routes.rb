@@ -5,6 +5,7 @@ BetterRailsDebugger::Engine.routes.draw do
   resources :group_instances do
     member do
       get 'objects'
+      get 'tracer'
       get 'code'
     end
   end
