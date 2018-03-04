@@ -1,3 +1,8 @@
+## 0.0.4
+* Group Instance view now display a summary about memory
+* Notice to the user about big files
+* Notice to the user about classes that consume big amounts of memory
+* Some code refactoring
 ## 0.0.3
 * Removed rouge dependency
 * List file with more allocations
