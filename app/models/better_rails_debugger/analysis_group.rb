@@ -21,6 +21,10 @@ module BetterRailsDebugger
     field :times_to_run, type: Integer, default: 0                     # 0: Infinite
     field :analyze_repeated_instances, type: Boolean, default: true    # if false, Check the identifier and do run the analyzer if already exist one with the same identifier
 
+    ## Code execution options
+    field :generate_method_execution_history, type: Boolean, default: false
+    field :calculate_execution_time_of_methods, type: Boolean, default: false
+
     # Internal use
     field :analise_paths, type: Array, default: []
 
