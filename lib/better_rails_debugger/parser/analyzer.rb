@@ -1,14 +1,14 @@
 # Include all language parsers here
 require_relative './ruby/parser'
 
-module BetterRailsDebugger
-  class Parser
+module BetterRailsDebugger::Parser
+  class Analyzer
     def initialize(path, options)
       @path = path
       @options = options
     end
 
-    def self.analize(path, options)
+    def self.analise(path, options)
       self.new(path, options).run
     end
 
