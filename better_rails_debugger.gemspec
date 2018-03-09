@@ -17,12 +17,13 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.4'
 
 
-  s.add_dependency "rails", ["~> 5.1.5", "< 6.0"]
-  s.add_dependency "haml-rails", ["~> 1.0", "< 2.0"]
-  s.add_dependency "mongoid", [">= 7.0.0.beta", "< 8.0"]
+  s.add_dependency "rails", "~> 5.1.5"
+  s.add_dependency "haml-rails", "~> 1.0"
+  s.add_dependency "mongoid", ">= 7.0.0.beta"
   s.add_dependency "will_paginate_mongoid"
   s.add_dependency "will_paginate-bootstrap4"
   s.add_dependency "font-awesome-rails"
+  s.add_dependency "parser", '> 2.5'
 
   s.add_development_dependency "sqlite3"
 end

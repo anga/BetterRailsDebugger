@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
   around_action :do_analysis
 
   def do_analysis
-    BetterRailsDebugger::MemoryAnalyzer.instance.analyze "#{request.url}", "5a98a93f50f04b079458fd57" do
+    BetterRailsDebugger::Analyzer.instance.analyze "#{request.url}", "5a98a93f50f04b079458fd57" do
       yield
     end
   end
