@@ -1,9 +1,11 @@
-class BaseLangParser
-  def initialize(path, options)
-    @path, @options = path, options
-  end
+module BetterRailsDebugger
+  class BaseLangParser
+    def initialize(path, options)
+      @path, @options = path, options
+    end
 
-  def analize
-    raise NotImplementedError
+    def analize
+      raise NotImplementedError
+    end
   end
 end
