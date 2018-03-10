@@ -1,6 +1,4 @@
 # Include all language parsers here
-require_relative './ruby/parser'
-
 module BetterRailsDebugger::Parser
   class Analyzer
     def initialize(path, options)
@@ -38,7 +36,7 @@ module BetterRailsDebugger::Parser
     end
 
     def get_lang_instance(lang)
-      "BetterRailsDebugger::#{lang.clasify}Parser".constantize.new @path, @options
+      "BetterRailsDebugger::#{lang.classify}::Parser".constantize.new @path, @options
     end
   end
 end
