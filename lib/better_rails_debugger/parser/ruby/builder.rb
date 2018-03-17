@@ -29,7 +29,7 @@ class Builder < ::Parser::Builders::Default
   # Singletons
 
   def nil(nil_t)
-    emit_signal(:nil, (nil_t: nil_t))
+    emit_signal(:nil, {nil_t: nil_t})
     super
   end
 
@@ -93,7 +93,7 @@ class Builder < ::Parser::Builders::Default
   end
 
   def string_compose(begin_t, parts, end_t)
-    emit_signal :string_compose {begin_t: begin_t, part: part, end_t: end_t}
+    emit_signal :string_compose, {begin_t: begin_t, parts: parts, end_t: end_t}
     super
   end
 
@@ -270,7 +270,7 @@ class Builder < ::Parser::Builders::Default
   end
 
   def const_global(t_colon3, name_t)
-    emit_signal const_global {t_colon3: t_colon3, name_t: name_t}
+    emit_signal :const_global, {t_colon3: t_colon3, name_t: name_t}
     super
   end
 
@@ -325,14 +325,18 @@ class Builder < ::Parser::Builders::Default
   def def_class(class_t, name,
                 lt_t, superclass,
                 body, end_t)
-    emit_signal :def_class, {class_t: class_t, name: name, lt_t: lt_t, superclass: superclass, body: body, end_t: end_t}
-    super
+    emit_signal :begin_def_class, {class_t: class_t, name: name, lt_t: lt_t, superclass: superclass, body: body, end_t: end_t}
+    r = super
+    emit_signal :end_def_class, {class_t: class_t, name: name, lt_t: lt_t, superclass: superclass, body: body, end_t: end_t}
+    r
   end
 
   def def_sclass(class_t, lshft_t, expr,
                  body, end_t)
-    emit_signal :def_sclass, {class_t: class_t, lshft_t: lshft_t, expr: expr, body: body, end_t: end_t}
-    super
+    emit_signal :begin_def_sclass, {class_t: class_t, lshft_t: lshft_t, expr: expr, body: body, end_t: end_t}
+    r = super
+    emit_signal :end_def_sclass, {class_t: class_t, lshft_t: lshft_t, expr: expr, body: body, end_t: end_t}
+    r
   end
 
   def def_module(module_t, name,
@@ -481,7 +485,7 @@ class Builder < ::Parser::Builders::Default
   end
 
   def objc_varargs(pair, rest_of_varargs)
-    emit_signal :objc_varargs {pair: pair, rest_of_varargs: rest_of_varargs}
+    emit_signal :objc_varargs, {pair: pair, rest_of_varargs: rest_of_varargs}
     super
   end
 
@@ -545,7 +549,7 @@ class Builder < ::Parser::Builders::Default
   end
 
   def ternary(cond, question_t, if_true, colon_t, if_false)
-    emit_signal :ternary, {cond: cond, question_t: question_t, if_true, colon_t: colon_t, if_false}
+    emit_signal :ternary, {cond: cond, question_t: question_t, if_true: if_true, colon_t: colon_t, if_false: if_false}
     super
   end
 
