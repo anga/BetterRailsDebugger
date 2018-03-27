@@ -4,7 +4,7 @@ module BetterRailsDebugger::Parser::Ruby
     def analise
       # Use some setting to select ruby version
       @node_tree = ::Parser::CurrentRuby.parse(File.read(@path)).to_sexp_array
-      @status = ParserStatus.new
+      @status = ContextRunner.new
       @klasses = Extension.sorted_extensions
       analise_node_tree(@node_tree)
     end

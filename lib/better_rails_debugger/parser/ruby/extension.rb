@@ -12,24 +12,39 @@ module BetterRailsDebugger::Parser::Ruby
 
     # Define the name of the extension.
     def self.name(extension_name)
-      raise ArgumentError.new "Argument must define to_s method" unless position.respond_to? :to_s
-      @@classes[self.class][:position] = position.to_s
+      raise ArgumentError.new "Argument must define to_s method" unless extension_name.respond_to? :to_s
+      @@classes[self.class][:name] = extension_name.to_s
+    end
+
+    def self.config_for(klass)
+      @@classes[klass]
     end
 
     def self.sorted_extensions
-      @@classes.to_a.sort_by do |_, config|
-        config[:position]
-      end.map do |array|
-        array[0]
+      ::BetterRailsDebugger::Parser::Ruby::Extension.descendants.sort_by do |klass|
+        config = config_for klass
+        # Classes without position goes at bottom
+        config[:position] || Float::INFINITY
       end
     end
 
-    def initialize(status)
-      @status = status
+    def initialize(processor)
+      @processor = processor
+    end
+
+    def setup
+
     end
 
     def run()
       raise ScriptError.new "Please, define run method"
     end
+
+    private
+
+    def processor
+      @processor
+    end
   end
 end
+require_relative 'basic_extensions/context_definer'
