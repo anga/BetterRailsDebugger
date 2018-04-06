@@ -16,3 +16,4 @@ gem 'kaminari'
 gem "will_paginate_mongoid"
 gem "will_paginate-bootstrap4"
 gem "font-awesome-rails"
+gem "parser"

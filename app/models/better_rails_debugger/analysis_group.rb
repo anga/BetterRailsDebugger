@@ -35,13 +35,10 @@ module BetterRailsDebugger
       end
 
       record_objects_in.to_s.split(/\n/).each do |line|
-        pp 'Line', line
         line = line.strip
         # Check if file exist
         if File.exist? line
-          pp 'File exist'
           if File.directory? line
-            pp 'File is a dir'
             analise_paths << /#{line}.*/
           elsif File.file? line
             analise_paths << /#{line}$/

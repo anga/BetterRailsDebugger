@@ -71,7 +71,6 @@ module BetterRailsDebugger
                                {source_line: /.*#{params[:filter]}.*/i},
                                {memsize:     /.*#{params[:filter]}.*/i},
                                {class_name:  /.*#{params[:filter]}.*/i})
-        pp @objects
       end
     end
 
@@ -88,7 +87,6 @@ module BetterRailsDebugger
                                {source_line: /.*#{params[:filter]}.*/i},
                                {memsize:     /.*#{params[:filter]}.*/i},
                                {class_name:  /.*#{params[:filter]}.*/i})
-        pp @objects
       end
     end
   end
