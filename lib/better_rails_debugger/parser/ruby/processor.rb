@@ -60,6 +60,7 @@ module BetterRailsDebugger::Parser::Ruby
     ].each do |method|
       define_method method do |node|
         emit_signal method.to_s.gsub('on_', '').to_sym, node
+        emit_signal :all, node
         super node
       end
     end
@@ -69,17 +70,12 @@ module BetterRailsDebugger::Parser::Ruby
     :on_until_post, :on_for, :on_resbody, :on_rescue, :on_ensure, :on_begin, :on_kwbegin].each do |method|
       define_method method do |node|
         emit_signal "begin_#{method.to_s.gsub('on_', '')}".to_sym, node
+        emit_signal :begin_all, node
         result = super node
         emit_signal "end_#{method.to_s.gsub('on_', '')}".to_sym, node
+        emit_signal :end_all, node
         result
       end
-    end
-
-    def on_class(node)
-      emit_signal :begin_class, node
-      result = super
-      emit_signal :end_class, node
-      result
     end
   end
 end
