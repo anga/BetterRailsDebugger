@@ -1,3 +1,9 @@
+## 0.1.1
+* Created the bases of ruby code analyzer (Ruby parser and ruby processor)
+* Created basic ruby parser extension/module system to allow other developers creates his owns extensions 
+(still not integrated with front end)
+* Created basic code of ContextDefiner extension as part of extension core
+* Created basic documentation about how to make your own extension and about ContextDefiner usage
 ## 0.1.0
 * Renamed `BetterRailsDebugger::MemoryAnalyzer` to `BetterRailsDebugger::Analyzer`
 * Group Instance view now display a summary about memory
