@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    better_rails_debugger (0.0.5)
+    better_rails_debugger (0.1.1)
       font-awesome-rails
       haml-rails (~> 1.0)
       mongoid (>= 7.0.0.beta)

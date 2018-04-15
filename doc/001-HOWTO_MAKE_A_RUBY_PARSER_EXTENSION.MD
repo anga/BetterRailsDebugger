@@ -11,9 +11,21 @@ class MyExtension < BetterRailsDebugger::Parser::Ruby::Extension
 end
 ```
 
-Also, you can set the position in the execution tree of the extension. For example, we want to use `context` information
-provided by `ContextDefined`. `ContextDefiner` has a position of `100`, then, we for example, put our extension at position
-`110` (just to leave some position before).
+All extension are executed sequentially. This give us some issues, what happens if we need to use the information that
+another extension stored?. To force the _when_ an extension is going to be executed, you can use `position`. For example,
+if we need to use `ContextDefiner` extension, we need to set the position of our extension after the position of this extension, 
+that is 100. For example, we can set the position of our extension to be `110`, this way, there is some space before our extension
+if someone depends wants to be executed just before and after `ContextDefiner`, just like this:
+
+```ruby
+class MyExtension < BetterRailsDebugger::Parser::Ruby::Extension
+  position 110
+  
+  def setup
+    # ...
+  end
+end
+```
 
 Once you have the position stabilised, the next step is to subscribe to parser signals into setup method, for example, 
 we want to warning the user when he puts many fors, we can subscribe to the signal `:begin_for` as the example below:
@@ -22,7 +34,7 @@ we want to warning the user when he puts many fors, we can subscribe to the sign
 
 ```ruby
 class MyExtension < BetterRailsDebugger::Parser::Ruby::Extension
-  positino 110
+  position 110
   
   def setup
     processor.subscribe_signal :begin_for do
@@ -38,3 +50,5 @@ class MyExtension < BetterRailsDebugger::Parser::Ruby::Extension
   end
 end
 ```
+
+> Next step, read CONTEXT_DEFINER.MD.
