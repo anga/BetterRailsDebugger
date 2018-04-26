@@ -29,7 +29,7 @@ module BetterRailsDebugger
 
     def objects
       begin
-      @instance = GroupInstance.find params[:id]
+        @instance = GroupInstance.find params[:id]
       rescue Mongoid::Errors::DocumentNotFound
         redirect_to analysis_groups_path, flash: {error: 'Instance not found'}
         return
@@ -43,7 +43,7 @@ module BetterRailsDebugger
 
     def code
       begin
-      @object = ObjectInformation.find(params[:object_id])
+        @object = ObjectInformation.find(params[:object_id])
       rescue Mongoid::Errors::DocumentNotFound
         redirect_to group_instance_path(params[:id]), flash: {error: 'Object not found'}
         return
@@ -53,6 +53,17 @@ module BetterRailsDebugger
       formatter = Rouge::Formatters::HTMLInline.new theme
       lexer = Rouge::Lexers::Ruby.new
       render plain: formatter.format(lexer.lex(@object.source_code || ""))
+    end
+
+    def backtrace
+      begin
+        @instance = GroupInstance.find params[:id]
+      rescue Mongoid::Errors::DocumentNotFound
+        redirect_to analysis_groups_path, flash: {error: 'Instance not found'}
+        return
+      end
+      @backtraces = ::BetterRailsDebugger::TracePointItem.backtraces_for(params[:id], params[:file], params[:line].to_i)
+      pp @backtraces
     end
 
     private

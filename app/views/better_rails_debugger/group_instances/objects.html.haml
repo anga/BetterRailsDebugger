@@ -61,7 +61,7 @@
             %td.col-8
               %i.fa.fa-eye.fa-2x.text-secondary{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{object.id}"}
               %span.text-primary
-                =object.source_file
+                =link_to object.source_file, backtrace_group_instance_path(@instance.id, file: object.source_file, line: object.source_line)
               %span= ":"
               %span.text-success=object.source_line
             %td.col-2= number_to_human_size object.memsize

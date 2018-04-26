@@ -7,6 +7,7 @@ BetterRailsDebugger::Engine.routes.draw do
       get 'objects'
       get 'tracer'
       get 'code'
+      get 'backtrace'
     end
   end
 

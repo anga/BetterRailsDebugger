@@ -1,3 +1,5 @@
+## 0.2.0
+* Generate backtrace information for every object creation
 ## 0.1.1
 * Created the bases of ruby code analyzer (Ruby parser and ruby processor)
 * Created basic ruby parser extension/module system to allow other developers creates his owns extensions 

@@ -42,7 +42,7 @@ module BetterRailsDebugger
       return @tracer if @tracer
       @tracer = TracePoint.new do |tp|
         # Record everything but us
-        @trace_point_history << {source_file: tp.path, source_line: tp.lineno, method_id: tp.method_id} if tp.path !~ /better_rails_debugger/
+        @trace_point_history << {source_file: tp.path, source_line: tp.lineno, method_id: tp.method_id, event: tp.event.to_s} if tp.path !~ /better_rails_debugger/
       end
     end
 

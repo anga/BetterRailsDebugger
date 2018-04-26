@@ -1,0 +1,47 @@
+.card
+  .card-header
+    = @instance.identifier
+    = "-"
+    = @instance.created_at.strftime("%c")
+  .card-body
+
+    - content_for :header_nav do
+      %ul.nav.navbar-nav.d-md-down-none
+        %li.nav-item
+          %a.nav-link.navbar-toggler.sidebar-toggler{:href => "#"} ☰
+        %li.nav-item.px-3
+          %a.nav-link{:href => group_instance_path(@instance)} List
+
+      %ul.navbar-nav.ml-md-auto
+
+
+    - content_for :breadcrum do
+      %ol.breadcrumb
+        %li.breadcrumb-item
+          %a{:href => analysis_groups_path} Analysis Groups
+        %li.breadcrumb-item
+          %a{:href => analysis_group_path(@instance.analysis_group.id)}= @instance.analysis_group.name
+        %li.breadcrumb-item
+          %a{:href => group_instance_path(@instance)}= @instance.identifier
+        %li.breadcrumb-item.active
+          %a{:href => "#"}
+            Backtrace for
+            = "#{params[:file]}:#{params[:line]}"
+
+    %h2 Backtraces list
+    - @backtraces.each do |backtrace|
+      %table.table.border.border-secondary.border-top-0
+        %thead.bg-secondary.text-white
+          %tr.d-flex
+            %th.col-8= order_link "Location", 'location', @instance
+
+        %tbody
+          - backtrace.each do |item|
+            %tr.d-flex
+              %td.col-12
+                %span.text-primary
+                  = item[0]
+                %span= ":"
+                %span.text-success= item[1]
+                \#
+                %span.text-warning= item[2]
