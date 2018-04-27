@@ -1,4 +1,8 @@
 # BetterRailsDebugger
+> NOTE ABOUT NEW BACKTRACE FEATURE ON 0.2: Backtrace feature is in a really heavy development and **contains** bugs
+> you can use it as a general reference. Get a backtrace of an already allocated object it's not simple (or
+> is not for me :P). I hope you understand. With love, Angaroshi <3
+
 > DISCLAIMER: This gem is in a really early development stage, you can start to use it, but
 > do not expect a lot of features. Right now, the only supported feature it's track Ruby objects creations. 
 
