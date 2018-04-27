@@ -1,3 +1,5 @@
+## 0.2.1
+* Fixed backtrace generation
 ## 0.2.0
 * Generate backtrace information for every object creation
 ## 0.1.1
