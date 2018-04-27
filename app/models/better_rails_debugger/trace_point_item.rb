@@ -23,10 +23,10 @@ module BetterRailsDebugger
         if bkt.source_file == file and bkt.source_line == line
           backtraces.push current_backtrace.dup.concat([[file, line, bkt.method_id]])
         # When we detect that we change the file and is not a method return (back to an old source file)
-        elsif bkt.source_file != last_source.source_file and (bkt.event.to_s == 'call' or bkt.event.to_s == 'c_call')
+        elsif bkt.event.to_s == 'call'
           current_backtrace.push([last_source.source_file, last_source.source_line, last_source.method_id])
           current_backtrace_sources.push last_source.source_line
-        elsif bkt.source_file != last_source.source_file and (bkt.event.to_s == 'return' or bkt.event.to_s == 'c_return')
+        elsif bkt.event.to_s == 'return'
           current_backtrace.pop
           current_backtrace_sources.pop
         end

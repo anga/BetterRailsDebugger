@@ -19,8 +19,9 @@ module BetterRailsDebugger::Parser::Ruby
 
     # Subscribe to a particular signal
     # @param signal_name Symbol
+    # @param step Symbol May be :first_pass or :second_pass
     # @param block Proc
-    def subscribe_signal(signal_name, &block)
+    def subscribe_signal(signal_name, step=:first_pass, &block)
       key = SecureRandom.hex(5)
       @subscriptions ||= Hash.new()
       @subscriptions[signal_name] ||= Hash.new
