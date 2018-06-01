@@ -6,6 +6,9 @@
 > DISCLAIMER: This gem is in a really early development stage, you can start to use it, but
 > do not expect a lot of features. Right now, the only supported feature it's track Ruby objects creations. 
 
+> The gem is not abandoned, I'm waiting Rails to fix an issue with webpacker that does not allow me to continue with next
+> features for this gem.
+
 Add a a couple of code analyzers that helps you to find where you are loosing performance or memory.
 
 Remember that tack memory allocation and free it's really expensive and is going to affect the performance
