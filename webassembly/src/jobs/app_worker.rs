@@ -40,7 +40,6 @@ impl Agent for AppWorker {
     type Output = Response;
 
     fn create(link: AgentLink<Self>) -> Self {
-        js!{console.log("Created....");}
         AppWorker {
             link,
             components: RwLock::new(HashMap::new()),
@@ -53,29 +52,10 @@ impl Agent for AppWorker {
     fn handle(&mut self, msg: Self::Input, who: HandlerId) {
         match msg {
             Request::RegisterComponent(name) => {
-                {
-                    self.components.write().unwrap().insert(name.clone(), who.clone());
-                }
-                {
-                    let mut console = ConsoleService::new();
-                    console.log("Adding");
-                    for key in self.components.get_mut().unwrap().keys() {
-                        console.log(key);
-                    }
-                    console.log("Adding end");
-                }
+                self.components.write().unwrap().insert(name.clone(), who.clone());
             }
             Request::UnregisterComponent(name) => {
-                js!{console.log("Removing component");}
                 self.components.write().unwrap().remove(&name.clone());
-                {
-                    let mut console = ConsoleService::new();
-                    console.log("Removing");
-                    for key in self.components.get_mut().unwrap().keys() {
-                        console.log(key);
-                    }
-                    console.log("removingend"); 
-                }
             }
             Request::SendMessageTo(to, message) => {
                 match self.components.read().unwrap().get(&to) {

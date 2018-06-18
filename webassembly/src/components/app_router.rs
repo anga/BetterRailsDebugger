@@ -10,13 +10,6 @@ pub trait Printer {
 use yew::prelude::*;
 use yew::services::console::ConsoleService;
 use jobs::app_worker::*;
- 
-// use stdweb::web::{
-//     HtmlElement,
-//     Element,
-//     document,
-//     window
-// };
 
 pub struct AppRouter {
     worker: Box<Bridge<AppWorker>>,
@@ -41,8 +34,6 @@ pub enum RouterMessage {
 }
 
 impl Component for AppRouter {
-    // Some details omitted. Explore the examples to get more.
-
     type Message = RouterMessage;
     type Properties = Props;
 
