@@ -1,0 +1,12 @@
+[package]
+name = "webassembly"
+version = "0.1.0"
+authors = ["anga <andres.b.dev@gmail.com>"]
+
+[dependencies]
+yew = {git = 'https://github.com/DenisKolodin/yew.git'}
+stdweb = '>= 0'
+lazy_static = "1.0"
+serde = "1.0"
+serde_derive = "1.0"
+
